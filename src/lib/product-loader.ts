@@ -7,12 +7,21 @@ import { loadDataModel, hasDataModel } from './data-model-loader'
 import { loadDesignSystem, hasDesignSystem } from './design-system-loader'
 import { loadShellInfo, hasShell } from './shell-loader'
 
-// Load markdown files from /product/ directory at build time
+// Load markdown files from /product/ directory
+// Using eager: false would require async, so we use eager but rely on HMR
 const productFiles = import.meta.glob('/product/*.md', {
   query: '?raw',
   import: 'default',
   eager: true,
 }) as Record<string, string>
+
+// Enable HMR for product files
+if (import.meta.hot) {
+  import.meta.hot.accept(() => {
+    // Force a full reload when product files change
+    import.meta.hot?.invalidate()
+  })
+}
 
 // Load zip files from root directory at build time
 const exportZipFiles = import.meta.glob('/product-plan.zip', {
@@ -55,6 +64,8 @@ export function parseProductOverview(md: string): ProductOverview | null {
   if (!md || !md.trim()) return null
 
   try {
+    // Normalize line endings to \n (handles Windows \r\n)
+    md = md.replace(/\r\n/g, '\n')
     // Extract product name from first # heading
     const nameMatch = md.match(/^#\s+(.+)$/m)
     const name = nameMatch?.[1]?.trim() || 'Product Overview'
@@ -120,6 +131,9 @@ export function parseProductRoadmap(md: string): ProductRoadmap | null {
   if (!md || !md.trim()) return null
 
   try {
+    // Normalize line endings to \n (handles Windows \r\n)
+    md = md.replace(/\r\n/g, '\n')
+
     const sections: Section[] = []
 
     // Match sections with pattern ### N. Title

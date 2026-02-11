@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { AppLayout } from '@/components/AppLayout'
 import { EmptyState } from '@/components/EmptyState'
@@ -7,7 +6,8 @@ import { NextPhaseButton } from '@/components/NextPhaseButton'
 import { loadProductData } from '@/lib/product-loader'
 
 export function DataModelPage() {
-  const productData = useMemo(() => loadProductData(), [])
+  // Load product data - will update when files change via HMR
+  const productData = loadProductData()
   const dataModel = productData.dataModel
 
   const hasDataModel = !!dataModel

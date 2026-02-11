@@ -1,0 +1,141 @@
+{
+  "_meta": {
+    "models": {
+      "adminUsers": "Admin-Benutzer sind Staff-Mitglieder mit Zugriff auf das Admin-Dashboard. Jeder Admin hat eine zugewiesene Rolle, die seine Berechtigungen bestimmt.",
+      "sessions": "Sessions verfolgen aktive Login-Sitzungen von Admin-Benutzern, inklusive Login-Zeit, Gerät/Browser-Informationen und Session-Status."
+    },
+    "relationships": [
+      "Jeder Admin User hat eine Role (Rolle), die seine Berechtigungen bestimmt",
+      "Ein Admin User kann mehrere Sessions haben (aktive Login-Sitzungen auf verschiedenen Geräten)"
+    ]
+  },
+  "adminUsers": [
+    {
+      "id": "admin-001",
+      "name": "Maria Huber",
+      "email": "maria.huber@hirter.at",
+      "role": "super-admin",
+      "status": "active",
+      "lastLogin": "2026-02-11T09:30:00Z",
+      "createdAt": "2025-11-15T10:00:00Z",
+      "invitedBy": null
+    },
+    {
+      "id": "admin-002",
+      "name": "Thomas Steiner",
+      "email": "thomas.steiner@hirter.at",
+      "role": "contest-manager",
+      "status": "active",
+      "lastLogin": "2026-02-10T14:22:00Z",
+      "createdAt": "2025-12-01T08:30:00Z",
+      "invitedBy": "admin-001"
+    },
+    {
+      "id": "admin-003",
+      "name": "Sarah Gruber",
+      "email": "sarah.gruber@hirter.at",
+      "role": "contest-manager",
+      "status": "active",
+      "lastLogin": "2026-02-09T16:45:00Z",
+      "createdAt": "2025-12-10T11:20:00Z",
+      "invitedBy": "admin-001"
+    },
+    {
+      "id": "admin-004",
+      "name": "Peter Moser",
+      "email": "peter.moser@hirter.at",
+      "role": "contest-manager",
+      "status": "inactive",
+      "lastLogin": "2026-01-20T10:15:00Z",
+      "createdAt": "2025-11-20T09:00:00Z",
+      "invitedBy": "admin-001"
+    },
+    {
+      "id": "admin-005",
+      "name": "Julia Wagner",
+      "email": "julia.wagner@hirter.at",
+      "role": "contest-manager",
+      "status": "invited",
+      "lastLogin": null,
+      "createdAt": "2026-02-08T13:30:00Z",
+      "invitedBy": "admin-001"
+    },
+    {
+      "id": "admin-006",
+      "name": "Michael Bauer",
+      "email": "michael.bauer@hirter.at",
+      "role": "super-admin",
+      "status": "active",
+      "lastLogin": "2026-02-11T08:15:00Z",
+      "createdAt": "2025-11-15T10:00:00Z",
+      "invitedBy": null
+    },
+    {
+      "id": "admin-007",
+      "name": "Anna Schmidt",
+      "email": "anna.schmidt@hirter.at",
+      "role": "contest-manager",
+      "status": "active",
+      "lastLogin": "2026-02-07T12:30:00Z",
+      "createdAt": "2026-01-05T14:00:00Z",
+      "invitedBy": "admin-006"
+    },
+    {
+      "id": "admin-008",
+      "name": "Lukas Berger",
+      "email": "lukas.berger@hirter.at",
+      "role": "contest-manager",
+      "status": "inactive",
+      "lastLogin": "2025-12-15T11:00:00Z",
+      "createdAt": "2025-11-18T13:45:00Z",
+      "invitedBy": "admin-001"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "session-001",
+      "adminUserId": "admin-001",
+      "deviceInfo": "Chrome 120 on Windows 11",
+      "ipAddress": "192.168.1.10",
+      "loginAt": "2026-02-11T09:30:00Z",
+      "lastActiveAt": "2026-02-11T11:45:00Z",
+      "status": "active"
+    },
+    {
+      "id": "session-002",
+      "adminUserId": "admin-001",
+      "deviceInfo": "Safari 17 on iPhone 15",
+      "ipAddress": "192.168.1.45",
+      "loginAt": "2026-02-10T18:20:00Z",
+      "lastActiveAt": "2026-02-10T19:30:00Z",
+      "status": "expired"
+    },
+    {
+      "id": "session-003",
+      "adminUserId": "admin-002",
+      "deviceInfo": "Firefox 121 on macOS Sonoma",
+      "ipAddress": "192.168.1.25",
+      "loginAt": "2026-02-10T14:22:00Z",
+      "lastActiveAt": "2026-02-11T10:15:00Z",
+      "status": "active"
+    },
+    {
+      "id": "session-004",
+      "adminUserId": "admin-006",
+      "deviceInfo": "Chrome 120 on macOS Sonoma",
+      "ipAddress": "192.168.1.30",
+      "loginAt": "2026-02-11T08:15:00Z",
+      "lastActiveAt": "2026-02-11T11:50:00Z",
+      "status": "active"
+    },
+    {
+      "id": "session-005",
+      "adminUserId": "admin-003",
+      "deviceInfo": "Edge 120 on Windows 11",
+      "ipAddress": "192.168.1.50",
+      "loginAt": "2026-02-09T16:45:00Z",
+      "lastActiveAt": "2026-02-09T18:20:00Z",
+      "status": "expired"
+    }
+  ]
+}

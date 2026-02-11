@@ -1,0 +1,170 @@
+{
+  "contests": [
+    {
+      "id": "contest-1",
+      "title": "Sommergewinnspiel 2025",
+      "description": "Gewinne einen Grillabend mit Hirter Bier für 10 Personen!",
+      "startDate": "2025-06-01T00:00:00Z",
+      "endDate": "2025-08-31T23:59:59Z",
+      "status": "active",
+      "rules": "Kaufe ein Hirter Bier-Produkt, lade deinen Kassenbon hoch und nimm automatisch teil.",
+      "prizes": [
+        {
+          "id": "prize-1",
+          "contestId": "contest-1",
+          "title": "Grillabend für 10 Personen",
+          "description": "Ein unvergesslicher Grillabend inkl. Hirter Bier",
+          "value": "500€",
+          "quantity": 1
+        },
+        {
+          "id": "prize-2",
+          "contestId": "contest-1",
+          "title": "Hirter Bier-Paket",
+          "description": "Ein großes Paket mit verschiedenen Hirter Bieren",
+          "value": "100€",
+          "quantity": 5
+        }
+      ],
+      "termsAndConditions": "Teilnahmeberechtigt sind alle Personen ab 18 Jahren..."
+    },
+    {
+      "id": "contest-2",
+      "title": "Wintergewinnspiel 2025",
+      "description": "Gewinne eine Reise nach Kärnten inkl. Brauereibesichtigung!",
+      "startDate": "2025-12-01T00:00:00Z",
+      "endDate": "2026-02-28T23:59:59Z",
+      "status": "draft",
+      "rules": "Kaufe ein Hirter Bier-Produkt, lade deinen Kassenbon hoch und nimm automatisch teil.",
+      "prizes": [
+        {
+          "id": "prize-3",
+          "contestId": "contest-2",
+          "title": "Kärnten-Reise mit Brauereibesichtigung",
+          "description": "3 Tage Kärnten inkl. Übernachtung und Brauereiführung",
+          "value": "1200€",
+          "quantity": 1
+        }
+      ],
+      "termsAndConditions": "Teilnahmeberechtigt sind alle Personen ab 18 Jahren..."
+    }
+  ],
+  "participants": [
+    {
+      "id": "participant-1",
+      "email": "max.mustermann@example.com",
+      "firstName": "Max",
+      "lastName": "Mustermann",
+      "address": "Musterstraße 1, 1010 Wien",
+      "phone": "+43 664 1234567",
+      "consent": true,
+      "consentDate": "2025-06-15T10:30:00Z"
+    },
+    {
+      "id": "participant-2",
+      "email": "anna.schmidt@example.com",
+      "firstName": "Anna",
+      "lastName": "Schmidt",
+      "consent": true,
+      "consentDate": "2025-06-20T14:22:00Z"
+    }
+  ],
+  "receipts": [
+    {
+      "id": "receipt-1",
+      "participantId": "participant-1",
+      "contestId": "contest-1",
+      "imageUrl": "/uploads/receipts/receipt-1.jpg",
+      "storeName": "Billa Plus Wien Mitte",
+      "purchaseDate": "2025-06-14T00:00:00Z",
+      "totalAmount": 24.99,
+      "products": "Hirter Märzen 6x0.5L, Hirter Privat Pils 6x0.33L",
+      "status": "verified",
+      "submittedAt": "2025-06-15T10:35:00Z"
+    },
+    {
+      "id": "receipt-2",
+      "participantId": "participant-2",
+      "contestId": "contest-1",
+      "imageUrl": "/uploads/receipts/receipt-2.jpg",
+      "storeName": "Spar Gourmet Salzburg",
+      "purchaseDate": "2025-06-19T00:00:00Z",
+      "totalAmount": 18.50,
+      "products": "Hirter Märzen 4x0.5L",
+      "status": "verified",
+      "submittedAt": "2025-06-20T14:25:00Z"
+    },
+    {
+      "id": "receipt-3",
+      "participantId": "participant-1",
+      "contestId": "contest-1",
+      "imageUrl": "/uploads/receipts/receipt-3.jpg",
+      "storeName": "Merkur Wien",
+      "purchaseDate": "2025-07-01T00:00:00Z",
+      "totalAmount": 31.20,
+      "products": "Hirter Morchl 6x0.5L, Hirter Zwickl 6x0.33L",
+      "status": "verified",
+      "submittedAt": "2025-07-01T18:45:00Z"
+    }
+  ],
+  "adminUsers": [
+    {
+      "id": "admin-1",
+      "email": "admin@hirterbier.at",
+      "firstName": "Johann",
+      "lastName": "Administrator",
+      "role": "super_admin",
+      "isActive": true,
+      "lastLoginAt": "2025-06-22T09:15:00Z"
+    },
+    {
+      "id": "admin-2",
+      "email": "marketing@hirterbier.at",
+      "firstName": "Maria",
+      "lastName": "Marketing",
+      "role": "contest_manager",
+      "isActive": true,
+      "invitedAt": "2025-05-10T14:00:00Z",
+      "lastLoginAt": "2025-06-21T11:30:00Z"
+    },
+    {
+      "id": "admin-3",
+      "email": "analytics@hirterbier.at",
+      "firstName": "Thomas",
+      "lastName": "Analytics",
+      "role": "analytics_viewer",
+      "isActive": true,
+      "invitedAt": "2025-05-15T10:00:00Z",
+      "lastLoginAt": "2025-06-22T08:00:00Z"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "session-1",
+      "adminUserId": "admin-1",
+      "loginAt": "2025-06-22T09:15:00Z",
+      "deviceInfo": "Chrome 125 on Windows 11",
+      "ipAddress": "192.168.1.100",
+      "isActive": true
+    },
+    {
+      "id": "session-2",
+      "adminUserId": "admin-2",
+      "loginAt": "2025-06-21T11:30:00Z",
+      "deviceInfo": "Safari 17 on macOS 14",
+      "ipAddress": "192.168.1.101",
+      "isActive": true
+    }
+  ],
+  "winners": [
+    {
+      "id": "winner-1",
+      "participantId": "participant-1",
+      "contestId": "contest-1",
+      "prizeId": "prize-2",
+      "selectedAt": "2025-09-01T12:00:00Z",
+      "notified": true,
+      "notifiedAt": "2025-09-01T14:30:00Z"
+    }
+  ]
+}

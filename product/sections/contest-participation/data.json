@@ -1,0 +1,202 @@
+{
+  "_meta": {
+    "models": {
+      "contest": "A sweepstakes campaign with its own rules, start/end dates, and prize information. Multiple contests can run simultaneously with independent configurations and participant pools.",
+      "receipt": "An uploaded receipt image with AI-extracted data including store name, purchase date, total amount, and products purchased. Each receipt represents one entry into a specific contest.",
+      "product": "An individual product line item extracted from a receipt, including the product name, quantity, price, and whether it qualifies for the contest."
+    },
+    "relationships": [
+      "Each Receipt is being submitted for a specific Contest",
+      "Each Receipt contains one or more Products (the line items extracted from the image)",
+      "Receipts track their processing status and any validation errors"
+    ]
+  },
+  "contest": {
+    "id": "contest-001",
+    "title": "Hirter Sommer Gewinnspiel 2024",
+    "description": "Gewinnen Sie einen von drei großartigen Preisen! Kaufen Sie Hirter Bier-Produkte, laden Sie Ihren Kassenbon hoch und nehmen Sie automatisch an der Verlosung teil.",
+    "prize": "1. Preis: Hirter Biererlebnis-Wochenende für 2 Personen\n2. Preis: Hirter Grillpaket im Wert von €150\n3. Preis: Hirter Merchandise-Set",
+    "startDate": "2024-06-01",
+    "endDate": "2024-08-31",
+    "status": "active",
+    "rules": [
+      "Teilnahmeberechtigt sind Personen ab 18 Jahren mit Wohnsitz in Österreich",
+      "Der Kassenbon muss mindestens ein Hirter Bier-Produkt enthalten",
+      "Der Kauf muss zwischen 01.06.2024 und 31.08.2024 erfolgt sein",
+      "Pro Kassenbon eine Teilnahme möglich",
+      "Mehrfachteilnahme mit verschiedenen Kassenbons erlaubt"
+    ],
+    "receiptRequirements": [
+      "Kaufdatum zwischen 01.06.2024 und 31.08.2024",
+      "Mindestens ein Hirter Bier-Produkt auf dem Kassenbon",
+      "Kassenbon muss vollständig lesbar sein (Geschäft, Datum, Produkte, Betrag)",
+      "Foto oder Scan in guter Qualität (JPG, PNG, PDF)"
+    ],
+    "qualifyingProducts": [
+      "Hirter Märzen",
+      "Hirter Privat Pils",
+      "Hirter Morchl",
+      "Hirter Bio-Zwickl",
+      "Hirter Kellerbier"
+    ]
+  },
+  "receipts": [
+    {
+      "id": "receipt-001",
+      "contestId": "contest-001",
+      "status": "processing",
+      "processingStage": "extracting",
+      "uploadedAt": "2024-07-15T14:32:00Z",
+      "imageUrl": "/receipts/receipt-001.jpg"
+    },
+    {
+      "id": "receipt-002",
+      "contestId": "contest-001",
+      "status": "review",
+      "storeName": "SPAR Markt Klagenfurt",
+      "purchaseDate": "2024-07-14",
+      "total": 23.47,
+      "uploadedAt": "2024-07-15T10:15:00Z",
+      "imageUrl": "/receipts/receipt-002.jpg",
+      "products": [
+        {
+          "id": "prod-001",
+          "name": "Hirter Märzen 0.5L",
+          "quantity": 6,
+          "pricePerUnit": 1.29,
+          "totalPrice": 7.74,
+          "qualifies": true
+        },
+        {
+          "id": "prod-002",
+          "name": "Käsekrainer",
+          "quantity": 2,
+          "pricePerUnit": 2.99,
+          "totalPrice": 5.98,
+          "qualifies": false
+        },
+        {
+          "id": "prod-003",
+          "name": "Brötchen 6 Stück",
+          "quantity": 1,
+          "pricePerUnit": 1.99,
+          "totalPrice": 1.99,
+          "qualifies": false
+        },
+        {
+          "id": "prod-004",
+          "name": "Hirter Privat Pils 0.5L",
+          "quantity": 6,
+          "pricePerUnit": 1.29,
+          "totalPrice": 7.74,
+          "qualifies": true
+        }
+      ]
+    },
+    {
+      "id": "receipt-003",
+      "contestId": "contest-001",
+      "status": "submitted",
+      "storeName": "Billa Plus Villach",
+      "purchaseDate": "2024-07-10",
+      "total": 45.89,
+      "uploadedAt": "2024-07-11T16:20:00Z",
+      "submittedAt": "2024-07-11T16:24:00Z",
+      "imageUrl": "/receipts/receipt-003.jpg",
+      "products": [
+        {
+          "id": "prod-005",
+          "name": "Hirter Morchl 0.5L Kiste",
+          "quantity": 1,
+          "pricePerUnit": 15.99,
+          "totalPrice": 15.99,
+          "qualifies": true
+        },
+        {
+          "id": "prod-006",
+          "name": "Grillkohle 5kg",
+          "quantity": 1,
+          "pricePerUnit": 8.99,
+          "totalPrice": 8.99,
+          "qualifies": false
+        },
+        {
+          "id": "prod-007",
+          "name": "Steakfleisch 600g",
+          "quantity": 1,
+          "pricePerUnit": 12.90,
+          "totalPrice": 12.90,
+          "qualifies": false
+        },
+        {
+          "id": "prod-008",
+          "name": "Salat Mix",
+          "quantity": 2,
+          "pricePerUnit": 2.49,
+          "totalPrice": 4.98,
+          "qualifies": false
+        }
+      ],
+      "confirmationNumber": "ENT-2024-001547"
+    },
+    {
+      "id": "receipt-004",
+      "contestId": "contest-001",
+      "status": "error",
+      "errorType": "invalid_image",
+      "errorMessage": "Das Foto ist zu unscharf. Bitte laden Sie ein Foto in besserer Qualität hoch, damit wir die Details Ihres Kassenbons lesen können.",
+      "uploadedAt": "2024-07-14T09:45:00Z",
+      "imageUrl": "/receipts/receipt-004.jpg"
+    },
+    {
+      "id": "receipt-005",
+      "contestId": "contest-001",
+      "status": "error",
+      "errorType": "non_qualifying",
+      "errorMessage": "Dieser Kassenbon enthält keine teilnahmeberechtigten Hirter Bier-Produkte. Bitte laden Sie einen Kassenbon mit mindestens einem Hirter Produkt hoch.",
+      "uploadedAt": "2024-07-13T18:30:00Z",
+      "imageUrl": "/receipts/receipt-005.jpg",
+      "storeName": "Hofer Klagenfurt",
+      "purchaseDate": "2024-07-13",
+      "total": 18.45,
+      "products": [
+        {
+          "id": "prod-009",
+          "name": "Ottakringer Helles 0.5L",
+          "quantity": 6,
+          "pricePerUnit": 0.99,
+          "totalPrice": 5.94,
+          "qualifies": false
+        },
+        {
+          "id": "prod-010",
+          "name": "Chips Paprika",
+          "quantity": 3,
+          "pricePerUnit": 1.49,
+          "totalPrice": 4.47,
+          "qualifies": false
+        },
+        {
+          "id": "prod-011",
+          "name": "Cola 2L",
+          "quantity": 2,
+          "pricePerUnit": 1.29,
+          "totalPrice": 2.58,
+          "qualifies": false
+        }
+      ]
+    },
+    {
+      "id": "receipt-006",
+      "contestId": "contest-001",
+      "status": "error",
+      "errorType": "duplicate",
+      "errorMessage": "Dieser Kassenbon wurde bereits eingereicht. Pro Kassenbon ist nur eine Teilnahme möglich.",
+      "uploadedAt": "2024-07-12T11:15:00Z",
+      "imageUrl": "/receipts/receipt-006.jpg",
+      "storeName": "SPAR Markt Klagenfurt",
+      "purchaseDate": "2024-07-10",
+      "total": 15.99
+    }
+  ]
+}

@@ -1,0 +1,790 @@
+{
+  "_meta": {
+    "models": {
+      "contests": "Jedes Gewinnspiel repräsentiert eine Kampagne mit eigenen Regeln, Start-/Enddaten und Preisinformationen. Mehrere Gewinnspiele können gleichzeitig mit unabhängigen Konfigurationen laufen.",
+      "templates": "Vorlagen sind vorkonfigurierte Contest-Strukturen, die als Ausgangspunkt für neue Gewinnspiele verwendet werden können. Sie können System-Vorlagen (von Hirter bereitgestellt) oder eigene gespeicherte Vorlagen sein.",
+      "participants": "Teilnehmer sind Kunden, die durch das Hochladen eines Belegs an einem Gewinnspiel teilgenommen haben. Sie können an mehreren Gewinnspielen teilnehmen und mehrere Belege pro Gewinnspiel einreichen.",
+      "receipts": "Hochgeladene Belegbilder mit AI-extrahierten Daten (Geschäftsname, Kaufdatum, Gesamtbetrag, Produkte). Jeder Beleg repräsentiert eine Teilnahme an einem spezifischen Gewinnspiel.",
+      "consents": "Zustimmungsinformationen für jeden Teilnehmer, die dokumentieren, welchen Datenverarbeitungszwecken zugestimmt wurde und wann."
+    },
+    "relationships": [
+      "Jeder Contest kann viele Participants haben (viele-zu-viele Beziehung)",
+      "Jeder Participant kann viele Receipts hochladen",
+      "Jeder Receipt gehört zu einem Participant und einem Contest",
+      "Jeder Participant hat Consent-Einträge für die verschiedenen Zustimmungstypen",
+      "Templates basieren auf der Struktur von Contests, haben aber keine Participants oder Receipts"
+    ]
+  },
+  "contests": [
+    {
+      "id": "contest-001",
+      "title": "Sommer Grillfest Gewinnspiel 2026",
+      "status": "active",
+      "startDate": "2026-06-01",
+      "endDate": "2026-08-31",
+      "description": "Laden Sie Ihren Kassenzettel hoch und gewinnen Sie einen von 10 Premium-Grills für Ihr Sommerfest!",
+      "rules": "Kaufen Sie mindestens 2 Kisten Hirter Bier bei einem teilnehmenden Händler und laden Sie Ihren Kassenzettel hoch. Pro Einkauf erhalten Sie eine Gewinnchance. Mehrfachteilnahme möglich.",
+      "prizes": [
+        {
+          "name": "Weber Premium Gasgrill",
+          "description": "Hochwertiger Gasgrill mit 4 Brennern und Seitenkocher",
+          "quantity": 3,
+          "value": 899.00
+        },
+        {
+          "name": "Grillzubehör-Set Premium",
+          "description": "Komplettes Grillbesteck mit Hirter Branding",
+          "quantity": 10,
+          "value": 149.00
+        },
+        {
+          "name": "Hirter Jahresvorrat",
+          "description": "12 Kisten Hirter Bier nach Wahl",
+          "quantity": 25,
+          "value": 360.00
+        }
+      ],
+      "terms": "Teilnahmeberechtigt sind alle Personen ab 18 Jahren mit Wohnsitz in Österreich. Mitarbeiter der Hirter Brauerei und deren Angehörige sind von der Teilnahme ausgeschlossen. Der Rechtsweg ist ausgeschlossen. Eine Barauszahlung der Gewinne ist nicht möglich.",
+      "participantCount": 1847,
+      "receiptCount": 2341,
+      "createdAt": "2026-05-15T09:23:11Z",
+      "updatedAt": "2026-06-12T14:45:33Z",
+      "isTemplate": false
+    },
+    {
+      "id": "contest-002",
+      "title": "Ski-Opening Gewinnspiel 2026/27",
+      "status": "draft",
+      "startDate": "2026-12-01",
+      "endDate": "2027-02-28",
+      "description": "Gewinnen Sie einen von 5 Skiurlauben in den Nockbergen inklusive 3 Nächte Unterkunft und Skipässe für 2 Personen.",
+      "rules": "Kaufen Sie mindestens 1 Kiste Hirter Bier und laden Sie Ihren Kassenzettel bis spätestens 28. Februar 2027 hoch. Die Verlosung findet am 10. März 2027 statt.",
+      "prizes": [
+        {
+          "name": "Skiurlaub für 2 Personen",
+          "description": "3 Nächte im 4-Sterne-Hotel inkl. Halbpension und Skipässen",
+          "quantity": 5,
+          "value": 1200.00
+        },
+        {
+          "name": "Hirter Winter-Fanpaket",
+          "description": "Mütze, Schal, Handschuhe und 2 Kisten Hirter Bier",
+          "quantity": 20,
+          "value": 85.00
+        }
+      ],
+      "terms": "Teilnahmeberechtigt sind alle Personen ab 18 Jahren mit Wohnsitz in Österreich. Mitarbeiter der Hirter Brauerei und deren Angehörige sind von der Teilnahme ausgeschlossen. Der Rechtsweg ist ausgeschlossen. Eine Barauszahlung der Gewinne ist nicht möglich. Reisezeitraum nach Verfügbarkeit.",
+      "participantCount": 0,
+      "receiptCount": 0,
+      "createdAt": "2026-10-12T11:15:22Z",
+      "updatedAt": "2026-11-03T16:28:45Z",
+      "isTemplate": false
+    },
+    {
+      "id": "contest-003",
+      "title": "Frühlingsfest Gewinnspiel 2026",
+      "status": "ended",
+      "startDate": "2026-03-01",
+      "endDate": "2026-05-31",
+      "description": "Frühlingserwachen mit Hirter - gewinnen Sie tolle Preise für die warme Jahreszeit!",
+      "rules": "Kaufen Sie Hirter Produkte im Wert von mindestens 20 Euro und laden Sie Ihren Kassenzettel hoch. Einsendeschluss war der 31. Mai 2026.",
+      "prizes": [
+        {
+          "name": "E-Bike",
+          "description": "Hochwertiges E-Mountainbike",
+          "quantity": 2,
+          "value": 2499.00
+        },
+        {
+          "name": "Picknick-Set für 4 Personen",
+          "description": "Komplettes Picknickset mit Hirter Branding",
+          "quantity": 15,
+          "value": 129.00
+        },
+        {
+          "name": "Hirter Frühlings-Sixpack",
+          "description": "6er-Träger Hirter Sorten nach Wahl",
+          "quantity": 50,
+          "value": 9.99
+        }
+      ],
+      "terms": "Teilnahmeberechtigt sind alle Personen ab 18 Jahren mit Wohnsitz in Österreich. Mitarbeiter der Hirter Brauerei und deren Angehörige sind von der Teilnahme ausgeschlossen. Der Rechtsweg ist ausgeschlossen. Die Gewinner wurden am 15. Juni 2026 schriftlich benachrichtigt.",
+      "participantCount": 3421,
+      "receiptCount": 4182,
+      "createdAt": "2026-02-10T08:45:12Z",
+      "updatedAt": "2026-06-15T10:22:18Z",
+      "isTemplate": false
+    },
+    {
+      "id": "contest-004",
+      "title": "Oktoberfest Mega-Gewinnspiel 2026",
+      "status": "active",
+      "startDate": "2026-09-15",
+      "endDate": "2026-10-15",
+      "description": "Feiern Sie mit uns! Gewinnen Sie eine Reise zum Münchner Oktoberfest für 4 Personen inklusive VIP-Zeltplätzen.",
+      "rules": "Kaufen Sie mindestens 3 Kisten Hirter Festbier und laden Sie Ihren Kassenzettel bis 15. Oktober 2026 hoch. Der Hauptgewinner wird am 20. Oktober 2026 gezogen und persönlich benachrichtigt.",
+      "prizes": [
+        {
+          "name": "Oktoberfest-Reise für 4 Personen",
+          "description": "2 Nächte München inkl. Hotel, VIP-Zeltplätze und Anreise",
+          "quantity": 1,
+          "value": 3500.00
+        },
+        {
+          "name": "Festbier Jahresvorrat",
+          "description": "24 Kisten Hirter Festbier",
+          "quantity": 5,
+          "value": 720.00
+        },
+        {
+          "name": "Trachten-Gutschein",
+          "description": "100 Euro Gutschein für Trachtenmode",
+          "quantity": 10,
+          "value": 100.00
+        }
+      ],
+      "terms": "Teilnahmeberechtigt sind alle Personen ab 18 Jahren mit Wohnsitz in Österreich. Mitarbeiter der Hirter Brauerei und deren Angehörige sind von der Teilnahme ausgeschlossen. Der Rechtsweg ist ausgeschlossen. Reisezeitraum: Oktoberfest 2027.",
+      "participantCount": 892,
+      "receiptCount": 1156,
+      "createdAt": "2026-08-20T13:30:45Z",
+      "updatedAt": "2026-09-18T09:15:22Z",
+      "isTemplate": false
+    },
+    {
+      "id": "contest-005",
+      "title": "Weihnachts-Gewinnspiel 2026",
+      "status": "draft",
+      "startDate": "2026-11-15",
+      "endDate": "2026-12-24",
+      "description": "Bescheren Sie sich selbst - täglich neue Gewinnchancen in unserem Adventkalender-Gewinnspiel!",
+      "rules": "Jeden Tag vom 1. bis 24. Dezember gibt es neue Preise zu gewinnen. Laden Sie Ihren Kassenzettel hoch und nehmen Sie automatisch an allen verbleibenden Tagesverlosungen teil.",
+      "prizes": [
+        {
+          "name": "Hauptpreis: Wellness-Wochenende",
+          "description": "2 Nächte für 2 Personen im 5-Sterne Thermenhotel",
+          "quantity": 1,
+          "value": 1500.00
+        },
+        {
+          "name": "Tagespreise: Hirter Geschenkboxen",
+          "description": "Exklusive Geschenkbox mit 6 Flaschen und Gläsern",
+          "quantity": 24,
+          "value": 49.99
+        },
+        {
+          "name": "Trostpreise: Hirter Sixpack",
+          "description": "6er-Träger nach Wahl",
+          "quantity": 100,
+          "value": 9.99
+        }
+      ],
+      "terms": "Teilnahmeberechtigt sind alle Personen ab 18 Jahren mit Wohnsitz in Österreich. Pro Tag wird ein Gewinner gezogen. Mitarbeiter der Hirter Brauerei und deren Angehörige sind von der Teilnahme ausgeschlossen. Der Rechtsweg ist ausgeschlossen.",
+      "participantCount": 0,
+      "receiptCount": 0,
+      "createdAt": "2026-10-01T10:00:00Z",
+      "updatedAt": "2026-10-15T14:22:11Z",
+      "isTemplate": false
+    },
+    {
+      "id": "template-001",
+      "title": "Standard Saisonales Gewinnspiel",
+      "status": "draft",
+      "startDate": "",
+      "endDate": "",
+      "description": "Gewinnen Sie tolle Preise! [Beschreibung anpassen]",
+      "rules": "Kaufen Sie Hirter Produkte im Wert von mindestens [BETRAG] Euro und laden Sie Ihren Kassenzettel bis [DATUM] hoch.",
+      "prizes": [
+        {
+          "name": "Hauptpreis",
+          "description": "[Hauptpreis Beschreibung]",
+          "quantity": 1,
+          "value": 0
+        },
+        {
+          "name": "Zweiter Preis",
+          "description": "[Zweiter Preis Beschreibung]",
+          "quantity": 5,
+          "value": 0
+        },
+        {
+          "name": "Trostpreise",
+          "description": "Hirter Produktpaket",
+          "quantity": 20,
+          "value": 50.00
+        }
+      ],
+      "terms": "Teilnahmeberechtigt sind alle Personen ab 18 Jahren mit Wohnsitz in Österreich. Mitarbeiter der Hirter Brauerei und deren Angehörige sind von der Teilnahme ausgeschlossen. Der Rechtsweg ist ausgeschlossen. Eine Barauszahlung der Gewinne ist nicht möglich.",
+      "participantCount": 0,
+      "receiptCount": 0,
+      "createdAt": "2025-12-01T08:00:00Z",
+      "updatedAt": "2025-12-01T08:00:00Z",
+      "isTemplate": true,
+      "templateCategory": "system",
+      "templateName": "Saisonales Gewinnspiel (Standard)"
+    },
+    {
+      "id": "template-002",
+      "title": "Großes Hauptpreis-Gewinnspiel",
+      "status": "draft",
+      "startDate": "",
+      "endDate": "",
+      "description": "Nehmen Sie teil und gewinnen Sie unseren exklusiven Hauptpreis! [Beschreibung anpassen]",
+      "rules": "Kaufen Sie mindestens [ANZAHL] Kisten Hirter Bier und laden Sie Ihren Kassenzettel hoch. Einsendeschluss ist der [DATUM].",
+      "prizes": [
+        {
+          "name": "Exklusiver Hauptpreis",
+          "description": "[Hauptpreis Beschreibung - z.B. Reise, Auto, etc.]",
+          "quantity": 1,
+          "value": 5000.00
+        },
+        {
+          "name": "Trostpreise",
+          "description": "Hirter Fanpaket",
+          "quantity": 50,
+          "value": 75.00
+        }
+      ],
+      "terms": "Teilnahmeberechtigt sind alle Personen ab 18 Jahren mit Wohnsitz in Österreich. Mitarbeiter der Hirter Brauerei und deren Angehörige sind von der Teilnahme ausgeschlossen. Der Rechtsweg ist ausgeschlossen. Eine Barauszahlung der Gewinne ist nicht möglich.",
+      "participantCount": 0,
+      "receiptCount": 0,
+      "createdAt": "2025-12-01T08:15:00Z",
+      "updatedAt": "2025-12-01T08:15:00Z",
+      "isTemplate": true,
+      "templateCategory": "system",
+      "templateName": "Hauptpreis-Gewinnspiel (High Value)"
+    },
+    {
+      "id": "template-003",
+      "title": "Frühlingsfest Gewinnspiel Vorlage",
+      "status": "draft",
+      "startDate": "",
+      "endDate": "",
+      "description": "Basierend auf dem erfolgreichen Frühlingsfest 2026",
+      "rules": "Kaufen Sie Hirter Produkte im Wert von mindestens 20 Euro und laden Sie Ihren Kassenzettel hoch.",
+      "prizes": [
+        {
+          "name": "E-Bike",
+          "description": "Hochwertiges E-Mountainbike",
+          "quantity": 2,
+          "value": 2499.00
+        },
+        {
+          "name": "Picknick-Set für 4 Personen",
+          "description": "Komplettes Picknickset mit Hirter Branding",
+          "quantity": 15,
+          "value": 129.00
+        },
+        {
+          "name": "Hirter Frühlings-Sixpack",
+          "description": "6er-Träger Hirter Sorten nach Wahl",
+          "quantity": 50,
+          "value": 9.99
+        }
+      ],
+      "terms": "Teilnahmeberechtigt sind alle Personen ab 18 Jahren mit Wohnsitz in Österreich. Mitarbeiter der Hirter Brauerei und deren Angehörige sind von der Teilnahme ausgeschlossen. Der Rechtsweg ist ausgeschlossen.",
+      "participantCount": 0,
+      "receiptCount": 0,
+      "createdAt": "2026-06-20T15:30:00Z",
+      "updatedAt": "2026-06-20T15:30:00Z",
+      "isTemplate": true,
+      "templateCategory": "custom",
+      "templateName": "Frühlingsfest 2026 (Eigene Vorlage)"
+    }
+  ],
+  "participants": [
+    {
+      "id": "participant-001",
+      "contestId": "contest-001",
+      "firstName": "Anna",
+      "lastName": "Gruber",
+      "email": "anna.gruber@email.at",
+      "phone": "+43 664 1234567",
+      "address": {
+        "street": "Hauptstraße 45",
+        "city": "Klagenfurt",
+        "postalCode": "9020",
+        "country": "Österreich"
+      },
+      "submittedAt": "2026-06-05T14:23:00Z",
+      "entryCount": 3,
+      "consentGiven": true,
+      "consentTimestamp": "2026-06-05T14:22:00Z"
+    },
+    {
+      "id": "participant-002",
+      "contestId": "contest-001",
+      "firstName": "Thomas",
+      "lastName": "Moser",
+      "email": "t.moser@gmx.at",
+      "phone": "+43 660 9876543",
+      "address": {
+        "street": "Bahnhofstraße 12",
+        "city": "Villach",
+        "postalCode": "9500",
+        "country": "Österreich"
+      },
+      "submittedAt": "2026-06-12T09:15:00Z",
+      "entryCount": 1,
+      "consentGiven": true,
+      "consentTimestamp": "2026-06-12T09:14:00Z"
+    },
+    {
+      "id": "participant-003",
+      "contestId": "contest-001",
+      "firstName": "Sarah",
+      "lastName": "Bergmann",
+      "email": "sarah.b@outlook.com",
+      "phone": "+43 676 5551234",
+      "address": {
+        "street": "Seestraße 78",
+        "city": "Velden am Wörthersee",
+        "postalCode": "9220",
+        "country": "Österreich"
+      },
+      "submittedAt": "2026-06-18T16:45:00Z",
+      "entryCount": 5,
+      "consentGiven": true,
+      "consentTimestamp": "2026-06-18T16:44:00Z"
+    },
+    {
+      "id": "participant-004",
+      "contestId": "contest-001",
+      "firstName": "Michael",
+      "lastName": "Steiner",
+      "email": "michael.steiner@aon.at",
+      "phone": "+43 650 4445566",
+      "address": {
+        "street": "Kirchplatz 3",
+        "city": "St. Veit an der Glan",
+        "postalCode": "9300",
+        "country": "Österreich"
+      },
+      "submittedAt": "2026-07-02T11:30:00Z",
+      "entryCount": 2,
+      "consentGiven": true,
+      "consentTimestamp": "2026-07-02T11:29:00Z"
+    },
+    {
+      "id": "participant-005",
+      "contestId": "contest-003",
+      "firstName": "Julia",
+      "lastName": "Hoffmann",
+      "email": "julia.hoffmann@email.at",
+      "phone": "+43 699 8887766",
+      "address": {
+        "street": "Parkweg 56",
+        "city": "Spittal an der Drau",
+        "postalCode": "9800",
+        "country": "Österreich"
+      },
+      "submittedAt": "2026-03-10T13:22:00Z",
+      "entryCount": 7,
+      "consentGiven": true,
+      "consentTimestamp": "2026-03-10T13:21:00Z"
+    },
+    {
+      "id": "participant-006",
+      "contestId": "contest-003",
+      "firstName": "David",
+      "lastName": "Wagner",
+      "email": "d.wagner@yahoo.com",
+      "phone": "+43 664 3332211",
+      "address": {
+        "street": "Rosentalstraße 89",
+        "city": "Feldkirchen in Kärnten",
+        "postalCode": "9560",
+        "country": "Österreich"
+      },
+      "submittedAt": "2026-03-25T10:05:00Z",
+      "entryCount": 4,
+      "consentGiven": true,
+      "consentTimestamp": "2026-03-25T10:04:00Z"
+    },
+    {
+      "id": "participant-007",
+      "contestId": "contest-004",
+      "firstName": "Lisa",
+      "lastName": "Brunner",
+      "email": "lisa.brunner@gmail.com",
+      "phone": "+43 676 1112233",
+      "address": {
+        "street": "Wiesenweg 34",
+        "city": "Wolfsberg",
+        "postalCode": "9400",
+        "country": "Österreich"
+      },
+      "submittedAt": "2026-09-20T18:40:00Z",
+      "entryCount": 12,
+      "consentGiven": true,
+      "consentTimestamp": "2026-09-20T18:39:00Z"
+    },
+    {
+      "id": "participant-008",
+      "contestId": "contest-004",
+      "firstName": "Patrick",
+      "lastName": "Huber",
+      "email": "patrick.huber@hotmail.com",
+      "phone": "+43 660 7778889",
+      "address": {
+        "street": "Industriestraße 12",
+        "city": "Völkermarkt",
+        "postalCode": "9100",
+        "country": "Österreich"
+      },
+      "submittedAt": "2026-09-25T08:12:00Z",
+      "entryCount": 8,
+      "consentGiven": true,
+      "consentTimestamp": "2026-09-25T08:11:00Z"
+    },
+    {
+      "id": "participant-009",
+      "contestId": "contest-001",
+      "firstName": "Martina",
+      "lastName": "Koch",
+      "email": "martina.koch@web.de",
+      "phone": null,
+      "address": {
+        "street": "Feldgasse 23",
+        "city": "Klagenfurt",
+        "postalCode": "9020",
+        "country": "Österreich"
+      },
+      "submittedAt": "2026-07-20T15:55:00Z",
+      "entryCount": 1,
+      "consentGiven": true,
+      "consentTimestamp": "2026-07-20T15:54:00Z"
+    },
+    {
+      "id": "participant-010",
+      "contestId": "contest-004",
+      "firstName": "Stefan",
+      "lastName": "Maier",
+      "email": "s.maier@t-online.de",
+      "phone": "+43 650 5556667",
+      "address": {
+        "street": "Bergstraße 67",
+        "city": "Villach",
+        "postalCode": "9500",
+        "country": "Österreich"
+      },
+      "submittedAt": "2026-09-28T12:33:00Z",
+      "entryCount": 15,
+      "consentGiven": true,
+      "consentTimestamp": "2026-09-28T12:32:00Z"
+    }
+  ],
+  "receipts": [
+    {
+      "id": "receipt-001",
+      "participantId": "participant-001",
+      "contestId": "contest-001",
+      "imageUrl": "/receipts/receipt-001.jpg",
+      "uploadedAt": "2026-06-05T14:23:00Z",
+      "status": "verified",
+      "extractedData": {
+        "storeName": "SPAR Klagenfurt Hauptplatz",
+        "storeAddress": "Hauptplatz 8, 9020 Klagenfurt",
+        "purchaseDate": "2026-06-04",
+        "total": 23.4,
+        "products": [
+          { "name": "Hirter Morchl 0,5l 6er", "quantity": 1, "price": 7.99 },
+          { "name": "Hirter Märzen 0,5l 6er", "quantity": 1, "price": 7.49 },
+          { "name": "Chips Paprika", "quantity": 1, "price": 2.49 },
+          { "name": "Erdnüsse gesalzen", "quantity": 1, "price": 1.99 }
+        ]
+      },
+      "verifiedAt": "2026-06-05T14:28:00Z"
+    },
+    {
+      "id": "receipt-002",
+      "participantId": "participant-001",
+      "contestId": "contest-001",
+      "imageUrl": "/receipts/receipt-002.jpg",
+      "uploadedAt": "2026-06-15T10:12:00Z",
+      "status": "verified",
+      "extractedData": {
+        "storeName": "Billa Klagenfurt Süd",
+        "storeAddress": "Südring 45, 9020 Klagenfurt",
+        "purchaseDate": "2026-06-14",
+        "total": 31.85,
+        "products": [
+          { "name": "Hirter Privat Pils 0,5l 12er", "quantity": 1, "price": 14.99 },
+          { "name": "Grillwürstel", "quantity": 1, "price": 5.49 },
+          { "name": "Ketchup Heinz", "quantity": 1, "price": 3.29 }
+        ]
+      },
+      "verifiedAt": "2026-06-15T10:17:00Z"
+    },
+    {
+      "id": "receipt-003",
+      "participantId": "participant-002",
+      "contestId": "contest-001",
+      "imageUrl": "/receipts/receipt-003.jpg",
+      "uploadedAt": "2026-06-12T09:15:00Z",
+      "status": "verified",
+      "extractedData": {
+        "storeName": "Interspar Villach",
+        "storeAddress": "Kärntner Straße 23, 9500 Villach",
+        "purchaseDate": "2026-06-11",
+        "total": 18.47,
+        "products": [
+          { "name": "Hirter Morchl 0,5l 6er", "quantity": 2, "price": 15.98 },
+          { "name": "Mineralwasser 1,5l", "quantity": 1, "price": 0.79 }
+        ]
+      },
+      "verifiedAt": "2026-06-12T09:20:00Z"
+    },
+    {
+      "id": "receipt-004",
+      "participantId": "participant-003",
+      "contestId": "contest-001",
+      "imageUrl": "/receipts/receipt-004.jpg",
+      "uploadedAt": "2026-06-18T16:45:00Z",
+      "status": "pending",
+      "extractedData": {
+        "storeName": "Merkur Velden",
+        "storeAddress": "Seepromenade 12, 9220 Velden",
+        "purchaseDate": "2026-06-18",
+        "total": 27.93,
+        "products": [
+          { "name": "Hirter Märzen 0,5l 12er", "quantity": 1, "price": 14.49 },
+          { "name": "Grillkohle 3kg", "quantity": 1, "price": 4.99 },
+          { "name": "Senf mittelscharf", "quantity": 1, "price": 1.89 }
+        ]
+      },
+      "verifiedAt": null
+    },
+    {
+      "id": "receipt-005",
+      "participantId": "participant-003",
+      "contestId": "contest-001",
+      "imageUrl": "/receipts/receipt-005.jpg",
+      "uploadedAt": "2026-06-20T11:30:00Z",
+      "status": "verified",
+      "extractedData": {
+        "storeName": "Billa Velden Zentrum",
+        "storeAddress": "Hauptstraße 34, 9220 Velden",
+        "purchaseDate": "2026-06-19",
+        "total": 45.87,
+        "products": [
+          { "name": "Hirter Morchl 0,5l 12er", "quantity": 2, "price": 29.98 },
+          { "name": "Grillkäse", "quantity": 2, "price": 7.98 },
+          { "name": "Salat Mix", "quantity": 1, "price": 2.49 }
+        ]
+      },
+      "verifiedAt": "2026-06-20T11:35:00Z"
+    },
+    {
+      "id": "receipt-006",
+      "participantId": "participant-007",
+      "contestId": "contest-004",
+      "imageUrl": "/receipts/receipt-006.jpg",
+      "uploadedAt": "2026-09-20T18:40:00Z",
+      "status": "verified",
+      "extractedData": {
+        "storeName": "SPAR Wolfsberg Zentrum",
+        "storeAddress": "Bambergerstraße 56, 9400 Wolfsberg",
+        "purchaseDate": "2026-09-20",
+        "total": 52.37,
+        "products": [
+          { "name": "Hirter Festbier 0,5l 24er", "quantity": 1, "price": 28.99 },
+          { "name": "Hirter Festbier 0,5l 12er", "quantity": 1, "price": 14.49 },
+          { "name": "Party-Chips Mix", "quantity": 1, "price": 6.99 }
+        ]
+      },
+      "verifiedAt": "2026-09-20T18:45:00Z"
+    },
+    {
+      "id": "receipt-007",
+      "participantId": "participant-008",
+      "contestId": "contest-004",
+      "imageUrl": "/receipts/receipt-007.jpg",
+      "uploadedAt": "2026-09-25T08:12:00Z",
+      "status": "verified",
+      "extractedData": {
+        "storeName": "Interspar Völkermarkt",
+        "storeAddress": "Gewerbepark 8, 9100 Völkermarkt",
+        "purchaseDate": "2026-09-24",
+        "total": 73.45,
+        "products": [
+          { "name": "Hirter Festbier 0,5l 24er", "quantity": 2, "price": 57.98 },
+          { "name": "Brezeln 500g", "quantity": 2, "price": 5.98 },
+          { "name": "Obazda 250g", "quantity": 1, "price": 3.99 }
+        ]
+      },
+      "verifiedAt": "2026-09-25T08:17:00Z"
+    }
+  ],
+  "consents": [
+    {
+      "id": "consent-001",
+      "participantId": "participant-001",
+      "contestId": "contest-001",
+      "consentType": "participation",
+      "consentText": "Ich stimme zu, dass meine Daten für die Teilnahme am Gewinnspiel verarbeitet werden.",
+      "consentGiven": true,
+      "consentTimestamp": "2026-06-05T14:22:00Z",
+      "ipAddress": "89.144.23.45"
+    },
+    {
+      "id": "consent-002",
+      "participantId": "participant-001",
+      "contestId": "contest-001",
+      "consentType": "marketing",
+      "consentText": "Ich möchte über zukünftige Gewinnspiele und Angebote von Hirter informiert werden.",
+      "consentGiven": true,
+      "consentTimestamp": "2026-06-05T14:22:00Z",
+      "ipAddress": "89.144.23.45"
+    },
+    {
+      "id": "consent-003",
+      "participantId": "participant-001",
+      "contestId": "contest-001",
+      "consentType": "data_storage",
+      "consentText": "Ich stimme der Speicherung meiner Daten für 6 Monate nach Gewinnspielende zu.",
+      "consentGiven": true,
+      "consentTimestamp": "2026-06-05T14:22:00Z",
+      "ipAddress": "89.144.23.45"
+    },
+    {
+      "id": "consent-004",
+      "participantId": "participant-002",
+      "contestId": "contest-001",
+      "consentType": "participation",
+      "consentText": "Ich stimme zu, dass meine Daten für die Teilnahme am Gewinnspiel verarbeitet werden.",
+      "consentGiven": true,
+      "consentTimestamp": "2026-06-12T09:14:00Z",
+      "ipAddress": "78.104.167.89"
+    },
+    {
+      "id": "consent-005",
+      "participantId": "participant-002",
+      "contestId": "contest-001",
+      "consentType": "marketing",
+      "consentText": "Ich möchte über zukünftige Gewinnspiele und Angebote von Hirter informiert werden.",
+      "consentGiven": false,
+      "consentTimestamp": "2026-06-12T09:14:00Z",
+      "ipAddress": "78.104.167.89"
+    },
+    {
+      "id": "consent-006",
+      "participantId": "participant-002",
+      "contestId": "contest-001",
+      "consentType": "data_storage",
+      "consentText": "Ich stimme der Speicherung meiner Daten für 6 Monate nach Gewinnspielende zu.",
+      "consentGiven": true,
+      "consentTimestamp": "2026-06-12T09:14:00Z",
+      "ipAddress": "78.104.167.89"
+    },
+    {
+      "id": "consent-007",
+      "participantId": "participant-003",
+      "contestId": "contest-001",
+      "consentType": "participation",
+      "consentText": "Ich stimme zu, dass meine Daten für die Teilnahme am Gewinnspiel verarbeitet werden.",
+      "consentGiven": true,
+      "consentTimestamp": "2026-06-18T16:44:00Z",
+      "ipAddress": "193.81.45.122"
+    },
+    {
+      "id": "consent-008",
+      "participantId": "participant-003",
+      "contestId": "contest-001",
+      "consentType": "marketing",
+      "consentText": "Ich möchte über zukünftige Gewinnspiele und Angebote von Hirter informiert werden.",
+      "consentGiven": true,
+      "consentTimestamp": "2026-06-18T16:44:00Z",
+      "ipAddress": "193.81.45.122"
+    },
+    {
+      "id": "consent-009",
+      "participantId": "participant-003",
+      "contestId": "contest-001",
+      "consentType": "data_storage",
+      "consentText": "Ich stimme der Speicherung meiner Daten für 6 Monate nach Gewinnspielende zu.",
+      "consentGiven": true,
+      "consentTimestamp": "2026-06-18T16:44:00Z",
+      "ipAddress": "193.81.45.122"
+    },
+    {
+      "id": "consent-010",
+      "participantId": "participant-004",
+      "contestId": "contest-001",
+      "consentType": "participation",
+      "consentText": "Ich stimme zu, dass meine Daten für die Teilnahme am Gewinnspiel verarbeitet werden.",
+      "consentGiven": true,
+      "consentTimestamp": "2026-07-02T11:29:00Z",
+      "ipAddress": "91.115.44.78"
+    },
+    {
+      "id": "consent-011",
+      "participantId": "participant-004",
+      "contestId": "contest-001",
+      "consentType": "marketing",
+      "consentText": "Ich möchte über zukünftige Gewinnspiele und Angebote von Hirter informiert werden.",
+      "consentGiven": false,
+      "consentTimestamp": "2026-07-02T11:29:00Z",
+      "ipAddress": "91.115.44.78"
+    },
+    {
+      "id": "consent-012",
+      "participantId": "participant-007",
+      "contestId": "contest-004",
+      "consentType": "participation",
+      "consentText": "Ich stimme zu, dass meine Daten für die Teilnahme am Gewinnspiel verarbeitet werden.",
+      "consentGiven": true,
+      "consentTimestamp": "2026-09-20T18:39:00Z",
+      "ipAddress": "217.149.178.34"
+    },
+    {
+      "id": "consent-013",
+      "participantId": "participant-007",
+      "contestId": "contest-004",
+      "consentType": "marketing",
+      "consentText": "Ich möchte über zukünftige Gewinnspiele und Angebote von Hirter informiert werden.",
+      "consentGiven": true,
+      "consentTimestamp": "2026-09-20T18:39:00Z",
+      "ipAddress": "217.149.178.34"
+    },
+    {
+      "id": "consent-014",
+      "participantId": "participant-008",
+      "contestId": "contest-004",
+      "consentType": "participation",
+      "consentText": "Ich stimme zu, dass meine Daten für die Teilnahme am Gewinnspiel verarbeitet werden.",
+      "consentGiven": true,
+      "consentTimestamp": "2026-09-25T08:11:00Z",
+      "ipAddress": "84.113.67.99"
+    },
+    {
+      "id": "consent-015",
+      "participantId": "participant-008",
+      "contestId": "contest-004",
+      "consentType": "marketing",
+      "consentText": "Ich möchte über zukünftige Gewinnspiele und Angebote von Hirter informiert werden.",
+      "consentGiven": false,
+      "consentTimestamp": "2026-09-25T08:11:00Z",
+      "ipAddress": "84.113.67.99"
+    },
+    {
+      "id": "consent-016",
+      "participantId": "participant-009",
+      "contestId": "contest-001",
+      "consentType": "participation",
+      "consentText": "Ich stimme zu, dass meine Daten für die Teilnahme am Gewinnspiel verarbeitet werden.",
+      "consentGiven": true,
+      "consentTimestamp": "2026-07-20T15:54:00Z",
+      "ipAddress": "88.116.223.67"
+    },
+    {
+      "id": "consent-017",
+      "participantId": "participant-009",
+      "contestId": "contest-001",
+      "consentType": "data_storage",
+      "consentText": "Ich stimme der Speicherung meiner Daten für 6 Monate nach Gewinnspielende zu.",
+      "consentGiven": true,
+      "consentTimestamp": "2026-07-20T15:54:00Z",
+      "ipAddress": "88.116.223.67"
+    }
+  ]
+}

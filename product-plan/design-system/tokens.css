@@ -1,0 +1,22 @@
+/* Design Tokens for Hirter Gewinnspiele */
+
+:root {
+  /* Colors */
+  --color-primary: #253081; /* Hirter Blue */
+  --color-secondary: #D5B376; /* Hirter Gold */
+  --color-neutral: stone; /* Tailwind stone palette */
+
+  /* Typography */
+  --font-heading: 'Apercu Pro', sans-serif;
+  --font-body: 'Apercu Pro', sans-serif;
+  --font-mono: 'Apercu Mono Pro', monospace;
+}
+
+/* Usage Note:
+ * Apercu Pro is a commercial font family.
+ * You will need to purchase a license or substitute with a similar font.
+ * Consider alternatives like:
+ * - Inter (free, similar geometric sans-serif)
+ * - DM Sans (free, clean and modern)
+ * - Work Sans (free, versatile)
+ */

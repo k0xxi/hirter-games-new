@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { ArrowLeft, Maximize2, GripVertical, Layout, Smartphone, Tablet, Monitor } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { ThemeToggle } from '@/components/ThemeToggle'
-import { loadScreenDesignComponent, sectionUsesShell } from '@/lib/section-loader'
+import { loadScreenDesignComponent, sectionUsesShell, getSectionShellType } from '@/lib/section-loader'
 import { loadAppShell, hasShellComponents, loadShellInfo } from '@/lib/shell-loader'
 import { loadProductData } from '@/lib/product-loader'
 import React from 'react'
@@ -249,6 +249,9 @@ export function ScreenDesignFullscreen() {
 
         // Create a wrapper that provides default props to the shell
         const ShellWrapper = ({ children }: { children?: React.ReactNode }) => {
+          // Get the shell type for this section (admin or public)
+          const shellType = sectionId ? getSectionShellType(sectionId) : 'admin'
+
           // Try to get navigation items from shell spec
           const shellInfo = loadShellInfo()
           const specNavItems = shellInfo?.spec?.navigationItems || []
@@ -280,6 +283,7 @@ export function ScreenDesignFullscreen() {
             <ShellComponent
               navigationItems={navigationItems}
               user={defaultUser}
+              shellType={shellType}
               onNavigate={() => {}}
               onLogout={() => {}}
             >

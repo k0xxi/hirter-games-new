@@ -131,12 +131,16 @@ export function parseSpec(md: string): ParsedSpec | null {
       }
     }
 
-    // Extract configuration - check for shell: false
+    // Extract configuration - check for shell: false and shellType
     // Look for "shell: false" or "- shell: false" anywhere in the document
     const shellDisabled = /(?:^|\n)\s*-?\s*shell\s*:\s*false/i.test(md)
     const useShell = !shellDisabled
 
-    return { title, overview, userFlows, uiRequirements, useShell }
+    // Look for shellType: public or shellType: admin
+    const shellTypeMatch = md.match(/(?:^|\n)\s*-?\s*shellType\s*:\s*(public|admin)/i)
+    const shellType = shellTypeMatch?.[1]?.toLowerCase() as 'public' | 'admin' | undefined
+
+    return { title, overview, userFlows, uiRequirements, useShell, shellType }
   } catch {
     return null
   }
@@ -238,6 +242,19 @@ export function sectionUsesShell(sectionId: string): boolean {
 
   const parsed = parseSpec(specContent)
   return parsed?.useShell ?? true
+}
+
+/**
+ * Get the shell type for a section (admin or public)
+ * Returns 'admin' by default, or the type specified in spec.md
+ */
+export function getSectionShellType(sectionId: string): 'admin' | 'public' {
+  const specPath = `/product/sections/${sectionId}/spec.md`
+  const specContent = specFiles[specPath]
+  if (!specContent) return 'admin' // Default to admin shell if no spec
+
+  const parsed = parseSpec(specContent)
+  return parsed?.shellType ?? 'admin'
 }
 
 /**

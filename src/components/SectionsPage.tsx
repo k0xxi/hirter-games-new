@@ -33,7 +33,8 @@ function getSectionProgress(sectionId: string): SectionProgress {
 
 export function SectionsPage() {
   const navigate = useNavigate()
-  const productData = useMemo(() => loadProductData(), [])
+  // Load product data - will update when files change via HMR
+  const productData = loadProductData()
 
   const sections = productData.roadmap?.sections || []
 

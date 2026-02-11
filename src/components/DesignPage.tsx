@@ -1,4 +1,3 @@
-import { useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { AppLayout } from '@/components/AppLayout'
@@ -64,7 +63,8 @@ function getDesignPageStepStatuses(
 }
 
 export function DesignPage() {
-  const productData = useMemo(() => loadProductData(), [])
+  // Load product data - will update when files change via HMR
+  const productData = loadProductData()
   const designSystem = productData.designSystem
   const shell = productData.shell
 
@@ -256,7 +256,18 @@ interface ColorSwatchProps {
 }
 
 function ColorSwatch({ label, colorName }: ColorSwatchProps) {
-  const colors = colorMap[colorName] || colorMap.stone
+  // Check if colorName is a hex color (starts with #)
+  const isHexColor = colorName.startsWith('#')
+
+  // For hex colors, generate lighter/darker variants
+  // For Tailwind color names, use the colorMap
+  const colors = isHexColor
+    ? {
+        light: adjustHexBrightness(colorName, 30),
+        base: colorName,
+        dark: adjustHexBrightness(colorName, -20),
+      }
+    : colorMap[colorName] || colorMap.stone
 
   return (
     <div>
@@ -264,21 +275,49 @@ function ColorSwatch({ label, colorName }: ColorSwatchProps) {
         <div
           className="flex-1 h-14 rounded-l-md"
           style={{ backgroundColor: colors.light }}
-          title={`${colorName}-300`}
+          title={isHexColor ? 'lighter' : `${colorName}-300`}
         />
         <div
           className="flex-[2] h-14"
           style={{ backgroundColor: colors.base }}
-          title={`${colorName}-500`}
+          title={isHexColor ? 'base' : `${colorName}-500`}
         />
         <div
           className="flex-1 h-14 rounded-r-md"
           style={{ backgroundColor: colors.dark }}
-          title={`${colorName}-600`}
+          title={isHexColor ? 'darker' : `${colorName}-600`}
         />
       </div>
       <p className="text-sm font-medium text-stone-900 dark:text-stone-100">{label}</p>
       <p className="text-xs text-stone-500 dark:text-stone-400">{colorName}</p>
     </div>
   )
+}
+
+/**
+ * Adjust hex color brightness by a percentage
+ * Positive values make it lighter, negative values make it darker
+ */
+function adjustHexBrightness(hex: string, percent: number): string {
+  // Remove # if present
+  const cleanHex = hex.replace('#', '')
+
+  // Parse RGB values
+  const r = parseInt(cleanHex.substring(0, 2), 16)
+  const g = parseInt(cleanHex.substring(2, 4), 16)
+  const b = parseInt(cleanHex.substring(4, 6), 16)
+
+  // Adjust brightness
+  const adjust = (value: number) => {
+    const adjusted = value + (value * percent) / 100
+    return Math.max(0, Math.min(255, Math.round(adjusted)))
+  }
+
+  const newR = adjust(r)
+  const newG = adjust(g)
+  const newB = adjust(b)
+
+  // Convert back to hex
+  const toHex = (value: number) => value.toString(16).padStart(2, '0')
+  return `#${toHex(newR)}${toHex(newG)}${toHex(newB)}`
 }

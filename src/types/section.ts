@@ -18,6 +18,8 @@ export interface ParsedSpec {
   uiRequirements: string[]
   /** Whether screen designs for this section should be wrapped in the app shell. Defaults to true. */
   useShell: boolean
+  /** The type of shell to use for this section. Either 'admin' (backend) or 'public' (customer-facing). Defaults to 'admin'. */
+  shellType?: 'admin' | 'public'
 }
 
 export interface ScreenDesignInfo {

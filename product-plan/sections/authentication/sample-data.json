@@ -1,0 +1,9 @@
+{
+  "_meta": {
+    "models": {
+      "authentication": "Authentication views handle login and password reset flows before users access the admin dashboard."
+    },
+    "relationships": []
+  },
+  "demoEmail": "admin@hirter.at"
+}
